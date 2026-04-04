@@ -1,0 +1,28 @@
+services:
+  postgres_raw:
+    image: postgres:15
+    container_name: olist_raw
+    environment:
+      POSTGRES_USER: ${RAW_USER}
+      POSTGRES_PASSWORD: ${RAW_PASSWORD}
+      POSTGRES_DB: ${RAW_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - raw_data:/var/lib/postgresql/data
+
+  postgres_dw:
+    image: postgres:15
+    container_name: olist_dw
+    environment:
+      POSTGRES_USER: ${DW_USER}
+      POSTGRES_PASSWORD: ${DW_PASSWORD}
+      POSTGRES_DB: ${DW_DB}
+    ports:
+      - "5437:5432"
+    volumes:
+      - dw_data:/var/lib/postgresql/data
+
+volumes:
+  raw_data:
+  dw_data:
